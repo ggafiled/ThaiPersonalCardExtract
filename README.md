@@ -14,15 +14,11 @@ Library for extract infomation from thai personal identity card.
 
 Resutls of library extract region of interest
 
-| | ![Identification Number](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Identification_Number.jpg?raw=true) | 
-|:--:| 
-| *Identification Number* | | | ![FullNameTH](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/FullNameTH.jpg?raw=true) | 
-|:--:| 
-| *FullNameTH* | |
-| ------------- | ------------- |
-| NameEN \n ![NameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/NameEN.jpg?raw=true)  | LastNameEN \n ![LastNameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LastNameEN.jpg?raw=true)  |
-| Birthday \n ![Birthday](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true)  | Address \n ![Address](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true)  |
-| Religion \n ![Religion](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true)  |  |
+| <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Identification_Number.jpg?raw=true"/>  <p class="image-caption">Identification Number</p> | <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/FullNameTH.jpg?raw=true"/>  <p class="image-caption">FullNameTH</p>|
+|----------|------------|
+| <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/NameEN.jpg?raw=true"/>  <p class="image-caption">NameEN</p> | <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LastNameEN.jpg?raw=true"/>  <p class="image-caption">LastNameEN</p> |
+| <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true"/>  <p class="image-caption">Birthday</p> | <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true"/>  <p class="image-caption">Address</p> |
+| <img align="center" src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true"/>  <p class="image-caption">Religion</p> |  |
 
 ## Installation
 Install using `pip` for stable release,

@@ -58,7 +58,7 @@ Output will be in list format, each item represents result of library can extrac
 }
 ```
 
-#Config Options
+# Config Options
 you can set options to Instance by below keyword
 
 | Parameter name | Value Type | Example
@@ -70,7 +70,7 @@ you can set options to Instance by below keyword
 | save_extract_result | Boolean | Set True if you want to save extracted image *Default is False
 | path_to_save | String | Path that you given it save extracted image, relative with save_extract_result=True
 
-#Donate Me ☕
+# Donate Me ☕
 
 ![promptpay](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/promptpay.png?raw=true)
 #### Mr.Nattapol Krobklang 

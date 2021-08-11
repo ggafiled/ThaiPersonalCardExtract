@@ -23,6 +23,11 @@ Resutls of library extract region of interest
 | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">Birthday</p> | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true"/></kbd></p>   <p align="center" class="image-caption">Address</p> |
 | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true"/></kbd> </p> <p align="center" class="image-caption">Religion</p>  |  |
 
+## Recommend ⚠
+* Image quality lowest should be 600x350  
+* Images with minimal reflections should be used. for good results
+* Identity Card should be size in the image about 75%, if the image doesn't cropped that to be left only Identity Card  area.
+
 ## Installation
 Install using `pip` for stable release,
 

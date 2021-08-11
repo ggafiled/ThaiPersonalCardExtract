@@ -12,7 +12,7 @@ def readme():
 setuptools.setup(
     name='thai-personal-card-extract',
     include_package_data=True,
-    version='1.0.1',
+    version='1.0.2',
     install_requires=requirements,
     license='Apache License 2.0',
     description='Library for extract infomation from thai personal identity card',

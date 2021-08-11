@@ -9,3 +9,4 @@ scikit-image
 scipy
 torch
 torchvision>=0.5
+easyocr

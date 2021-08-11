@@ -36,9 +36,9 @@ For latest development release,
 pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 ```
 
-Note 1: for Windows, please install tesseract first by following the official instruction here https://medium.com/@navapat.tpb/734dae2fb4d3 On medium website, be sure to setup already.
+<b>Note 1:</b> for Windows, please install tesseract first by following the official instruction here https://medium.com/@navapat.tpb/734dae2fb4d3 On medium website, be sure to setup already.
 
-Note 2: for Linux os, please install tesseract by following the official instruction https://github.com/tesseract-ocr/tesseract
+<b>Note 2:</b> for Linux os, please install tesseract by following the official instruction https://github.com/tesseract-ocr/tesseract
 
 ## Usage
 ``` python

@@ -1,5 +1,5 @@
 # ThaiPersonalCardExtract
-[![PyPI Status](https://badge.fury.io/py/https://badge.fury.io/py/thai-personal-card-extract.svg)](https://badge.fury.io/py/thai-personal-card-extract)
+[![PyPI Status](https://badge.fury.io/py/thai-personal-card-extract.svg)](https://badge.fury.io/py/thai-personal-card-extract)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/JaidedAI/EasyOCR/blob/master/LICENSE)
 [![Instragram](https://img.shields.io/badge/instragram-@ggafiled-blue.svg?style=flat)](https://www.instagram.com/ggafiled)
 
@@ -7,18 +7,18 @@ Library for extract infomation from thai personal identity card.
 
 ## Examples
 #### Real image file.
-![example](examples/card.jpg)
+![example](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
 
 #### wrapPerpective image crop.
-![example](examples/extract/image_scan.jpg)
+![example](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/image_scan.jpg?raw=true)
 
 Resutls of library extract region of interest
 
-| Identification Number ![Identification Number](examples/extract/Identification_Number.jpg)  | FullNameTH ![FullNameTH](examples/extract/FullNameTH.jpg) |
+| #### Identification Number ![Identification Number](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Identification_Number.jpg?raw=true)  | #### FullNameTH ![FullNameTH](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/FullNameTH.jpg?raw=true) |
 | ------------- | ------------- |
-| NameEN ![NameEN](examples/extract/NameEN.jpg)  | LastNameEN ![LastNameEN](examples/extract/LastNameEN.jpg)  |
-| Birthday ![Birthday](examples/extract/Birthday.jpg)  | Address ![Address](examples/extract/Address.jpg)  |
-| Religion ![Religion](examples/extract/Religion.jpg)  |  |
+| #### NameEN ![NameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/NameEN.jpg?raw=true)  | #### LastNameEN ![LastNameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LastNameEN.jpg?raw=true)  |
+| #### Birthday ![Birthday](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true)  | #### Address ![Address](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true)  |
+| #### Religion ![Religion](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true)  |  |
 
 ## Installation
 Install using `pip` for stable release,
@@ -72,5 +72,5 @@ you can set options to Instance by below keyword
 
 #Donate Me ☕
 
-![promptpay](examples/promptpay.png)
+![promptpay](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/promptpay.png?raw=true)
 #### Mr.Nattapol Krobklang 

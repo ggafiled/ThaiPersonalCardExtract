@@ -1,0 +1,6 @@
+include examples/*
+include src/datasets/*
+include src/ThaiPersonalCardExtract/datasets/*
+include LICENSE.txt
+include README.md
+include requirements.txt

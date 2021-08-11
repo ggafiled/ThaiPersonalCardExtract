@@ -78,6 +78,9 @@ class PersonalCard:
         for x, y in matches:
             if x.distance < self.template_threshold * y.distance:
                 self.good.append(x)
+        img = cv2.drawMatches(self.image, self.process_kp, self.source_image_front_tempalte, self.source_front_kp, self.source_image_front_tempalte)
+        cv2.imshow('keypoint matche', img)
+        cv2.waitKey(0)
 
     def findAndWrapObject(self):
         if len(self.good) > 10:

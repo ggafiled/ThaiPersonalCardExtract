@@ -7,10 +7,13 @@ Library for extract infomation from thai personal identity card.
 
 ## Examples
 #### Real image file.
-![example](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
+![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
 
 #### wrapPerpective image crop.
-![example](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/image_scan.jpg?raw=true)
+![wrapPerpective image crop](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/image_scan.jpg?raw=true)
+
+#### keypoint of image detected.
+![keypoint of image detected](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/image_keypoint.jpg?raw=true)
 
 Resutls of library extract region of interest
 

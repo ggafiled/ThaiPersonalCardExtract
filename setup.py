@@ -12,7 +12,7 @@ def readme():
 setuptools.setup(
     name='thai-personal-card-extract',
     include_package_data=True,
-    version='1.0.0',
+    version='1.0.1',
     install_requires=requirements,
     license='Apache License 2.0',
     description='Library for extract infomation from thai personal identity card',
@@ -20,11 +20,11 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author='ggafiled.io (Nattapol Krobklang)',
     author_email='gafewkik234@gmail.com',
-    url='https://github.com/ggafiled/ThaiPersonalCardExtrac',
+    url='https://github.com/ggafiled/ThaiPersonalCardExtract',
     project_urls={
-        "Bug Tracker": "https://github.com/ggafiled/ThaiPersonalCardExtrac/issues",
+        "Bug Tracker": "https://github.com/ggafiled/ThaiPersonalCardExtract/issues",
     },
-    download_url='https://github.com/ggafiled/ThaiPersonalCardExtrac.git',
+    download_url='https://github.com/ggafiled/ThaiPersonalCardExtract.git',
     keywords=['ocr optical character recognition deep learning neural network'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

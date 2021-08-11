@@ -106,4 +106,4 @@ ENV/
 #virtual env
  .vscode/
 
- .idea
+ .idea/

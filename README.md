@@ -3,8 +3,8 @@
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/JaidedAI/EasyOCR/blob/master/LICENSE)
 [![Instragram](https://img.shields.io/badge/instragram-@ggafiled-blue.svg?style=flat)](https://www.instagram.com/ggafiled)
 
-Library for extract infomation from thai personal identity card. 
-
+Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
+ 
 ## Examples
 #### Real image file.
 ![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)

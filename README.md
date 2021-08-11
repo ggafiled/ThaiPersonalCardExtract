@@ -14,11 +14,11 @@ Library for extract infomation from thai personal identity card.
 
 Resutls of library extract region of interest
 
-| #### Identification Number ![Identification Number](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Identification_Number.jpg?raw=true)  | #### FullNameTH ![FullNameTH](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/FullNameTH.jpg?raw=true) |
+| Identification Number \n ![Identification Number](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Identification_Number.jpg?raw=true)  | FullNameTH \n ![FullNameTH](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/FullNameTH.jpg?raw=true) |
 | ------------- | ------------- |
-| #### NameEN ![NameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/NameEN.jpg?raw=true)  | #### LastNameEN ![LastNameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LastNameEN.jpg?raw=true)  |
-| #### Birthday ![Birthday](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true)  | #### Address ![Address](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true)  |
-| #### Religion ![Religion](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true)  |  |
+| NameEN \n ![NameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/NameEN.jpg?raw=true)  | LastNameEN \n ![LastNameEN](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LastNameEN.jpg?raw=true)  |
+| Birthday \n ![Birthday](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Birthday.jpg?raw=true)  | Address \n ![Address](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true)  |
+| Religion \n ![Religion](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true)  |  |
 
 ## Installation
 Install using `pip` for stable release,

@@ -57,7 +57,7 @@ pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 
 ## Usage
 
-[![Watch the video](http://i3.ytimg.com/vi/FmPN667DTmE/maxresdefault.jpg)](https://www.youtube.com/watch?v=FmPN667DTmE&t=5s)
+[![Watch the video](http://i3.ytimg.com/vi/FmPN667DTmE/hqdefault.jpg)](https://www.youtube.com/watch?v=FmPN667DTmE&t=5s)
 
 ``` python
 # With build-in Config Options.

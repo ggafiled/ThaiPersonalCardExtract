@@ -56,6 +56,9 @@ pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 <b>Note 2:</b> for Linux os, please install tesseract by following the official instruction https://github.com/tesseract-ocr/tesseract
 
 ## Usage
+
+[![Watch the video](https://imgur.com/OtsJ2ns.jpeg)](https://www.youtube.com/watch?v=FmPN667DTmE&t=5s)
+
 ``` python
 # With build-in Config Options.
 import ThaiPersonalCardExtract as card

@@ -6,7 +6,7 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-# New Feature 🎁
+## New Feature 🎁
 * More arae extract.
 * lang : attribute : get only area of given language.
 * provider : attribute : set ocr provider now support easyocr and tesseract.

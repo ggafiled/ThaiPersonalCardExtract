@@ -1,5 +1,7 @@
-from ThaiPersonalCardExtract import PersonalCard
-reader = PersonalCard(
+import src.ThaiPersonalCardExtract as card
+reader = card.PersonalCard(
+    lang=card.THAI,
+    provider=card.DEFAULT,
     tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract",
     save_extract_result=True,
     path_to_save="D:/dev/ThaiPersonalCardExtract/examples/extract")

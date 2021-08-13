@@ -151,10 +151,7 @@ class PersonalCard:
 
             if str(self.provider) == Provider.DEFAULT.value:
                 if str(box[6]) == str(str(Provider.EASYOCR)):
-                    if len(box) == 8:
-                        self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, allowlist=box[7]))).split())
-                    else:
-                        self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0))).split())
+                    self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0))).split())
                 elif str(box[6]) == str(Provider.TESSERACT):
                     self.cardInfo[str(self.lang)][box[3]] = str.strip(
                         " ".join(pytesseract.image_to_string(imgCrop, lang=box[4].split(",")[0], config=box[5])
@@ -165,12 +162,7 @@ class PersonalCard:
                             .replace("'", '')
                             .split()))
             elif str(self.provider) == str(Provider.EASYOCR):
-                if len(box) == 8:
-                    self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip("".join(
-                        self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0,
-                                             allowlist=box[7]))).split())
-                else:
-                    self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip(
+                self.cardInfo[str(self.lang)][box[3]] = " ".join(str.strip(
                         "".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0))).split())
             elif str(self.provider) == str(Provider.TESSERACT):
                 self.cardInfo[str(self.lang)][box[3]] = str.strip(

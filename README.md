@@ -94,7 +94,7 @@ Output will be in list format, each item represents result of library can extrac
 }
 ```
 
-For set ``` bash lang ``` attribute to ``` bash tha ```
+For set ``` lang ``` attribute to ``` tha ```
 ``` python
 from ThaiPersonalCardExtract import PersonalCard
 reader = PersonalCard(lang="tha", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
@@ -118,7 +118,7 @@ Output will be in list format, each item represents result of library can extrac
 }
 ```
 
-And you can set ocr provider following below ``` bash default  #used both easyocr and tesseract **Recommend ``` Or ``` bash easyocr ``` Or ``` bash tesseract ```
+And you can set ocr provider following below ``` default  #used both easyocr and tesseract **Recommend ``` Or ``` easyocr ``` Or ``` tesseract ```
 ``` python
 from ThaiPersonalCardExtract import PersonalCard
 reader = PersonalCard(lang="tha", provider="default", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.

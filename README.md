@@ -5,6 +5,11 @@
 [![Instragram](https://img.shields.io/badge/instragram-@ggafiled-blue.svg?style=flat)](https://www.instagram.com/ggafiled)
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
+
+# New Feature 🎁
+* More arae extract.
+* lang : attribute : get only area of given language.
+* provider : attribute : set ocr provider now support easyocr and tesseract.
  
 ## Examples
 #### Real image file.

@@ -1,1 +1,3 @@
-from .PersonalCard import PersonalCard
+from .PersonalCard.PersonalCard import *
+
+globals().update(PersonalCard.__dict__)

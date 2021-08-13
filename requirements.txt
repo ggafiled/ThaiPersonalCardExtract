@@ -1,7 +1,7 @@
 matplotlib
 numpy
 opencv-python>=4.0
-Pillow
+Pillow>=8.3
 pytesseract>=0.3
 python-bidi
 PyYAML

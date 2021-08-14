@@ -10,7 +10,7 @@ from PIL import Image
 from pathlib import Path
 
 
-class PersonalCard:
+class DrivingLicense:
     def __init__(self,
                  lang: Language = Language.MIX,
                  provider: Provider = Provider.DEFAULT,
@@ -32,45 +32,35 @@ class PersonalCard:
         self.good = []
         self.cardInfo = {
             "mix": {
-                "Identification_Number": "",
-                "FullNameTH": "",
-                "PrefixTH": "",
+                "License_Number": "",
+                "IssueDateTH": "",
+                "ExpiryDateTH": "",
+                "IssueDateEN": "",
+                "ExpiryDateEN": "",
                 "NameTH": "",
-                "LastNameTH": "",
-                "PrefixEN": "",
                 "NameEN": "",
-                "LastNameEN": "",
-                "BirthdayTH": "",
-                "BirthdayEN": "",
-                "Religion": "",
-                "Address": "",
-                "DateOfIssueTH": "",
-                "DateOfIssueEN": "",
-                "DateOfExpiryTH": "",
-                "DateOfExpiryEN": "",
+                "BirthDayTH": "",
+                "BirthDayEN": "",
+                "Identity_Number": "",
+                "Province": "",
             },
             "tha": {
-                "Identification_Number": "",
-                "FullNameTH": "",
-                "PrefixTH": "",
+                "License_Number": "",
+                "IssueDateTH": "",
+                "ExpiryDateTH": "",
                 "NameTH": "",
-                "LastNameTH": "",
-                "BirthdayTH": "",
-                "Religion": "",
-                "Address": "",
-                "DateOfIssueTH": "",
-                "DateOfExpiryTH": "",
+                "BirthDayTH": "",
+                "Identity_Number": "",
+                "Province": "",
             },
             "eng": {
-                "Identification_Number": "",
-                "PrefixEN": "",
+                "License_Number": "",
+                "IssueDateEN": "",
+                "ExpiryDateEN": "",
                 "NameEN": "",
-                "LastNameEN": "",
-                "BirthdayEN": "",
-                "Religion": "",
-                "Address": "",
-                "DateOfIssueEN": "",
-                "DateOfExpiryEN": "",
+                "BirthDayEN": "",
+                "Identity_Number": "",
+                "Province": "",
             }
         }
 
@@ -92,12 +82,9 @@ class PersonalCard:
 
     def __loadSIFT(self):
         self.source_image_front_tempalte = self.__readImage(
-            os.path.join(self.root_path, 'datasets', 'identity_card/personal-card-template.jpg'))
-        self.source_image_back_tempalte = self.__readImage(os.path.join(
-            self.root_path, 'datasets', 'identity_card/personal-card-back-template.jpg'))
+            os.path.join(self.root_path, 'datasets', 'driving_license/thai-driving-license-template.jpg'))
         self.source_front_kp, self.source_front_des = self.sift.detectAndCompute(self.source_image_front_tempalte, None)
-        self.source_back_kp, self.source_back_des = self.sift.detectAndCompute(self.source_image_back_tempalte, None)
-        with open(os.path.join(self.root_path, 'datasets', 'identity_card/config.yaml'), 'r') as f:
+        with open(os.path.join(self.root_path, 'datasets', 'driving_license/config.yaml'), 'r') as f:
             try:
                 self.roi_extract = yaml.safe_load(f)
             except yaml.YAMLError as exc:
@@ -133,11 +120,12 @@ class PersonalCard:
                     lambda item: str(self.lang) in item["lang"],
                     self.roi_extract["roi_extract"])):
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
-            imgCrop = cv2.adaptiveThreshold(imgCrop, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8)
+            imgCrop = cv2.convertScaleAbs(imgCrop)
+            imgCrop = automatic_brightness_and_contrast(imgCrop)[0]
 
             if str(self.provider) == Provider.DEFAULT.value:
                 if str(box["provider"]) == str(str(Provider.EASYOCR)):
-                    self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0))).split())
+                    self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, blocklist=box["blocklist"] or None))).split())
                 elif str(box["provider"]) == str(Provider.TESSERACT):
                     self.cardInfo[str(self.lang)][box["name"]] = str.strip(
                         " ".join(pytesseract.image_to_string(imgCrop, lang=box["lang"].split(",")[0], config=box["tesseract_config"])
@@ -162,27 +150,6 @@ class PersonalCard:
 
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)
-
-        if str(self.lang) == str(Language.MIX):
-            extract_th = self.cardInfo[str(self.lang)]["FullNameTH"].split(' ')
-            self.cardInfo[str(self.lang)]["PrefixTH"] = str("".join(extract_th[0]))
-            self.cardInfo[str(self.lang)]["NameTH"] = str(
-                "".join(extract_th[1] if len(extract_th) > 2 else extract_th[-1]))
-            self.cardInfo[str(self.lang)]["LastNameTH"] = str("".join(extract_th[-1]))
-
-            extract_en = self.cardInfo[str(self.lang)]["NameEN"].split(' ')
-            self.cardInfo[str(self.lang)]["PrefixEN"] = str("".join(extract_en[0]))
-            self.cardInfo[str(self.lang)]["NameEN"] = str("".join(extract_en[1:]))
-        elif str(self.lang) == str(Language.THAI):
-            extract_th = self.cardInfo[str(self.lang)]["FullNameTH"].split(' ')
-            self.cardInfo[str(self.lang)]["PrefixTH"] = str("".join(extract_th[0]))
-            self.cardInfo[str(self.lang)]["NameTH"] = str(
-                "".join(extract_th[1] if len(extract_th) > 2 else extract_th[-1]))
-            self.cardInfo[str(self.lang)]["LastNameTH"] = str("".join(extract_th[-1]))
-        elif str(self.lang) == str(Language.ENGLISH):
-            extract_en = self.cardInfo[str(self.lang)]["NameEN"].split(' ')
-            self.cardInfo[str(self.lang)]["PrefixEN"] = str(extract_en[0])
-            self.cardInfo[str(self.lang)]["NameEN"] = str(extract_en[1:])
 
         return self.cardInfo[str(self.lang)]
 

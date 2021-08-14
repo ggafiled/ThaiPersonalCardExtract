@@ -6,14 +6,16 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature 🎁
-* More arae extract.
-* lang : attribute : get only area of given language.
-* provider : attribute : set ocr provider now support easyocr and tesseract.
- 
+## New Feature v1.3 🎁
+* Increase performance.
+* Support Thai Driving License (Beta) สามารถสกัดข้อมูลจากภาพถ่ายใบขับขี่ได้บางรูปแบบ เนื่องจาก กรมทางขนส่งทางบก มีรูปแบบบัตรหลากหลายรูปแบบ และแต่ละรูปแบบมีตำแหน่งข้อมูลที่แตกต่างกัน จึงทำให้ประสิทธิภาพต่ำ
+* ปรับเปลี่ยนรูปแบบไฟล์ระบบ
+* Support Thai Government Lottery (Further works)
+
 ## Examples
 #### Real image file.
 ![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
+![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card4.jpg?raw=true)
 
 #### wrapPerpective image crop.
 ![wrapPerpective image crop](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/image_scan.jpg?raw=true)
@@ -71,6 +73,12 @@ print(result)
 
 # With free-style 
 from ThaiPersonalCardExtract import PersonalCard
+reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
+result = reader.extractInfo('examples/card.jpg')
+print(result)
+
+# With free-style 
+from ThaiPersonalCardExtract import DrivingLicense
 reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 result = reader.extractInfo('examples/card.jpg')
 print(result)

@@ -1,0 +1,123 @@
+---
+roi_extract:
+- point:
+  - 393
+  - 58
+  - 565
+  - 90
+  type: text
+  name: License_Number
+  lang: eng,tha
+  tesseract_config: "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 232
+  - 90
+  - 356
+  - 110
+  type: text
+  name: IssueDateTH
+  lang: tha
+  tesseract_config: ''
+  blocklist: ""
+  provider: easyocr
+- point:
+  - 424
+  - 91
+  - 568
+  - 111
+  type: text
+  name: ExpiryDateTH
+  lang: tha
+  tesseract_config: ''
+  blocklist: ""
+  provider: easyocr
+- point:
+  - 235
+  - 110
+  - 354
+  - 125
+  type: text
+  name: IssueDateEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 440
+  - 110
+  - 572
+  - 125
+  type: text
+  name: ExpiryDateEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 200
+  - 142
+  - 542
+  - 185
+  type: text
+  name: NameTH
+  lang: tha
+  tesseract_config: ''
+  blocklist: ""
+  provider: easyocr
+- point:
+  - 213
+  - 179
+  - 560
+  - 205
+  type: text
+  name: NameEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 13 --oem 1 -c tessedit_char_whitelist='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz. '"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 230
+  - 227
+  - 374
+  - 252
+  type: text
+  name: BirthDayTH
+  lang: tha
+  tesseract_config: ''
+  blocklist: ''
+  provider: easyocr
+- point:
+  - 243
+  - 252
+  - 378
+  - 268
+  type: text
+  name: BirthDayEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 356
+  - 273
+  - 507
+  - 292
+  type: text
+  name: Identity_Number
+  lang: eng,tha
+  tesseract_config: "--oem 1 -c tessedit_char_whitelist=0123456789"
+  blocklist: ""
+  provider: tesseract
+- point:
+  - 95
+  - 303
+  - 553
+  - 335
+  type: text
+  name: Province
+  lang: tha,eng
+  tesseract_config: ''
+  blocklist: ""
+  provider: easyocr

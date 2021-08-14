@@ -1,0 +1,122 @@
+---
+roi_extract:
+- point:
+  - 258
+  - 38
+  - 543
+  - 72
+  type: text
+  name: Identification_Number
+  lang: eng,tha
+  tesseract_config: "--oem 1 -c tessedit_char_whitelist=0123456789"
+  provider: tesseract
+- point:
+  - 165
+  - 65
+  - 545
+  - 110
+  type: text
+  name: FullNameTH
+  lang: tha
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  provider: easyocr
+- point:
+  - 223
+  - 105
+  - 422
+  - 130
+  type: text
+  name: NameEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 13 --oem 1 -c tessedit_char_whitelist='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz. '"
+  provider: tesseract
+- point:
+  - 264
+  - 134
+  - 449
+  - 152
+  type: text
+  name: LastNameEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 13 --oem 1 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  provider: tesseract
+- point:
+  - 258
+  - 154
+  - 406
+  - 182
+  type: text
+  name: BirthdayTH
+  lang: tha
+  tesseract_config: "--dpi 300"
+  provider: easyocr
+- point:
+  - 295
+  - 179
+  - 438
+  - 207
+  type: text
+  name: BirthdayEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  provider: tesseract
+- point:
+  - 240
+  - 208
+  - 309
+  - 233
+  type: text
+  name: Religion
+  lang: tha,eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  provider: easyocr
+- point:
+  - 60
+  - 220
+  - 410
+  - 278
+  type: text
+  name: Address
+  lang: tha,eng
+  tesseract_config: "--dpi 300 --psm 13 --oem 1"
+  provider: easyocr
+- point:
+  - 50
+  - 275
+  - 140
+  - 297
+  type: text
+  name: DateOfIssueTH
+  lang: tha
+  tesseract_config: "--dpi 300"
+  provider: easyocr
+- point:
+  - 50
+  - 313
+  - 147
+  - 332
+  type: text
+  name: DateOfIssueEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  provider: tesseract
+- point:
+  - 332
+  - 275
+  - 436
+  - 300
+  type: text
+  name: DateOfExpiryTH
+  lang: tha
+  tesseract_config: "--dpi 300"
+  provider: easyocr
+- point:
+  - 327
+  - 312
+  - 436
+  - 333
+  type: text
+  name: DateOfExpiryEN
+  lang: eng
+  tesseract_config: "--dpi 300 --psm 7 --oem 1"
+  provider: tesseract

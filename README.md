@@ -6,15 +6,16 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature v1.3.1 🎁
+## New Feature v1.3.2 🎁
 * Increase performance.
-* Support Thai Driving License (Beta) สามารถสกัดข้อมูลจากภาพถ่ายใบขับขี่ได้บางรูปแบบ เนื่องจาก กรมทางขนส่งทางบก มีรูปแบบบัตรหลากหลายรูปแบบ และแต่ละรูปแบบมีตำแหน่งข้อมูลที่แตกต่างกัน จึงทำให้ประสิทธิภาพต่ำ
 * Support Thai Government Lottery (16 Aug. 2021)
+* Refactor Output Structure.
+* Support Thai Driving License (Beta) สามารถสกัดข้อมูลจากภาพถ่ายใบขับขี่ได้บางรูปแบบ เนื่องจาก กรมทางขนส่งทางบก มีรูปแบบบัตรหลากหลายรูปแบบ และแต่ละรูปแบบมีตำแหน่งข้อมูลที่แตกต่างกัน จึงทำให้ประสิทธิภาพต่ำ
 
 ## Examples
-#### Real image file.
-![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card7.jpg?raw=true)
-![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
+#### Example image file.
+![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/lottery_example.jpg?raw=true)
+![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card1.jpg?raw=true)
 ![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card4.jpg?raw=true)
 
 #### wrapPerpective image crop.
@@ -60,7 +61,8 @@ pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 
 ## Usage
 ``` python
-# With build-in Config Options.
+# With build-in Config Options. 
+
 import ThaiPersonalCardExtract as card
 reader = card.PersonalCard(
     lang=card.THAI,
@@ -72,55 +74,48 @@ result = reader.extractInfo('examples/card.jpg')
 print(result)
 
 
-# With free-style 
+# With free-style ตัวอย่างการเรียกใช้งานคลาส PersonalCard เพื่อสกัดข้อมูลบัตรประจำตัวประชาชน 
+
 from ThaiPersonalCardExtract import PersonalCard
 reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 result = reader.extractInfo('examples/card.jpg')
 print(result)
 
-# With free-style 
+
+# With free-style ตัวอย่างการเรียกใช้งานคลาส DrivingLicense เพื่อสกัดข้อมูลใบอนุญาตขับขี่
+
 from ThaiPersonalCardExtract import DrivingLicense
 reader = DrivingLicense(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 result = reader.extractInfo('examples/card.jpg')
 print(result)
 
-# With free-style 
+
+# With free-style ตัวอย่างการเรียกใช้งานคลาส ThaiGovernmentLottery เพื่อสกัดข้อมูลลอตเตอร์รี่
+
 from ThaiPersonalCardExtract import ThaiGovernmentLottery
-reader = ThaiGovernmentLottery(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
-result = reader.extractInfo('examples/card.jpg')
+reader = ThaiGovernmentLottery(save_extract_result=True, path_to_save="D:/dev/ThaiPersonalCardExtract/examples/extract/thai_government_lottery") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
+result = reader.extractInfo("../examples/card7.jpg")
 print(result)
 ```
 
-Output will be in list format, each item represents result of library can extract, respectively.
+Output will be in list format, each item represents result of library can extract, respectively. type of namedtuple
+ผลลัพธ์ที่ได้จะเป็นประเภท [namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) สามารถศึกษาเพิ่มเติมเพื่อใช้งานได้จากที่นี่ [คลิก](https://docs.python.org/3/library/collections.html#collections.namedtuple)
 
 ``` bash
 #Output of PersonalCard
-{
-   "Identification_Number": "9999999999999",
-   "FullNameTH": "นาย อายุมฺมุราเสะ",
-   "PrefixTH": "นาย",
-   "NameTH": "อายุมฺมุราเสะ",
-   "LastNameTH": "อายุมฺมุราเสะ",
-   "PrefixEN": "Me",
-   "NameEN": "Shoys",
-   "LastNameEN": "Hinata",
-   "BirthdayTH": "21 มี.ย. 2539",
-   "BirthdayEN": "21 Jun..1996",
-   "Religion": "พุทธ",
-   "Address": "ท๒ 99/1 มิชีโฮะ เขตฮานามิกาวา อำเภอชิบ;",
-   "DateOfIssueTH": "11 ส.ค. 2554",
-   "DateOfIssueEN": "~11 Ang. 2021",
-   "DateOfExpiryTH": "11 ส.ค. 2574",
-   "DateOfExpiryEN": "21 ug. 2092"
-}
+    Card(Identification_Number='9999999999999', FullNameTH='นาย อายุมฺมุราเสะ', PrefixTH='นาย', NameTH='อายุมฺมุราเสะ', LastNameTH='อายุมฺมุราเสะ', PrefixEN='.Mr.Shoyo', NameEN='', LastNameEN='Hinatao', BirthdayTH='21 มี.ย. 2539', BirthdayEN='21 Jun..1996', Religion='พุทธ', Address='ท8ปฺ` 99/1 มิซีโฮะ เขตฮานามิกาวา อำเภอชิบ', DateOfIssueTH='11 ส.ค. 2554', DateOfIssueEN='11 Ang. 2021', DateOfExpiryTH='11 ส.ค. 2574', DateOfExpiryEN='11 Aug. 2031,')
+
+#Output of DrivingLicense
+    Card(License_Number='98765432', IssueDateTH='ผังทาทม', ExpiryDateTH='', IssueDateEN='14 August 2664', ExpiryDateEN='14 August 2574', NameTH='า? โนบกะ โนบี', NameEN='MRONOREAUMANE', BirthDayTH='', BirthDayEN='wa hs OKRA', Identity_Number='', Province='นคาราชศีมา')
 
 #Output of ThaiGovernmentLottery
-{
-   "LotteryNumber":"424603",
-   "DateLesson":"16 กุมภ1พันธ์ 2564",
-   "LessonNumber":"",
-   "SetNumber":"23"
-}
+    Lottery(LotteryNumber='424603', LessonNumber='08', SetNumber='23', Year='2564') #type namedtuple 
+    
+ สามารถเข้าถึงตัวแปรได้ตามรูปแบบนี้
+ print(result.LotteryNumber)
+ print(result.LessonNumber)
+ print(result.SetNumber)
+ print(result.Year)
 ```
 
 For set ``` lang ``` attribute to ``` tha ```
@@ -160,8 +155,8 @@ you can set options to Instance by below keyword
 
 | Parameter name | Value Type | Example
 | ------------- | ------------- | ------------- |
-| lang | String | Expected Results Language ``` bash mix  #get all area both tha and eng ``` Or ``` bash tha ``` Or ``` bash eng ``` *Default is 'mix'
-| provider | String | OCR Provider have ``` bash default  #used both easyocr and tesseract **Recommend ``` Or ``` bash easyocr ``` Or ``` bash tesseract ``` *Default is 'default'
+| lang | String | Expected Results Language ``` bash mix  #get all area both tha and eng ``` Or ``` bash tha ``` Or ``` bash eng ``` *Default is 'mix' <b>สำหรับ DrivingLicense, PersonalCard</b>
+| provider | String | OCR Provider have ``` bash default  #used both easyocr and tesseract **Recommend ``` Or ``` bash easyocr ``` Or ``` bash tesseract ``` *Default is 'default' <b>สำหรับ DrivingLicense, PersonalCard</b>
 | template_threshold | Double | Rate to cals similarity of template *Default is 0.7
 | sift_rate | Int | Feature Keypoint rate *Default is 25,000
 | tesseract_cmd | String | Path of your tesseract command **For windows only.

@@ -7,11 +7,11 @@ roi_extract:
   - 65
   type: text
   name: LotteryNumber
-  lang: eng,tha
-  tesseract_config: "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789"
-  blocklist: ""
-  allowlist: "0123456789"
-  provider: easyocr
+  lang: ''
+  tesseract_config: ""
+  blocklist: ''
+  allowlist: ''
+  provider: ''
 - point:
   - 308
   - 84
@@ -19,11 +19,11 @@ roi_extract:
   - 113
   type: text
   name: DateLesson
-  lang: tha,eng
-  tesseract_config: "--psm 7 --oem 1"
-  blocklist: ""
-  allowlist: ""
-  provider: easyocr
+  lang: ''
+  tesseract_config: ""
+  blocklist: ''
+  allowlist: ''
+  provider: ''
 - point:
   - 364
   - 178
@@ -31,11 +31,11 @@ roi_extract:
   - 212
   type: text
   name: LessonNumber
-  lang: eng,tha
-  tesseract_config: "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789"
-  blocklist: ""
-  allowlist: "0123456789"
-  provider: easyocr
+  lang: ''
+  tesseract_config: ""
+  blocklist: ''
+  allowlist: ''
+  provider: ''
 - point:
   - 466
   - 172
@@ -43,8 +43,20 @@ roi_extract:
   - 213
   type: text
   name: SetNumber
-  lang: eng,tha
-  tesseract_config: "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789"
-  blocklist: ""
-  allowlist: "0123456789"
-  provider: easyocr
+  lang: ''
+  tesseract_config: ""
+  blocklist: ''
+  allowlist: ''
+  provider: ''
+- point:
+  - 247
+  - 65
+  - 301
+  - 122
+  type: text
+  name: Qrcode
+  lang: ''
+  tesseract_config: ''
+  blocklist: ''
+  allowlist: ''
+  provider: qrcode

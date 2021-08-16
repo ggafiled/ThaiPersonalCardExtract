@@ -10,3 +10,5 @@ scipy
 torch
 torchvision>=0.5
 easyocr
+pylibdmtx
+pylibdmtx[scripts]

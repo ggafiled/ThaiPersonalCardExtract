@@ -1,4 +1,5 @@
 from ..utils import Language, Provider, automatic_brightness_and_contrast
+from collections import namedtuple
 import os
 import cv2
 import sys
@@ -8,7 +9,6 @@ import pytesseract
 import easyocr
 from PIL import Image
 from pathlib import Path
-
 
 class DrivingLicense:
     def __init__(self,
@@ -153,7 +153,8 @@ class DrivingLicense:
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)
 
-        return self.cardInfo[str(self.lang)]
+        _card = namedtuple('Card',self.cardInfo[str(self.lang)].keys())(*self.cardInfo[str(self.lang)].values())
+        return _card
 
     def extractInfo(self, image):
         self.image = self.__readImage(image)

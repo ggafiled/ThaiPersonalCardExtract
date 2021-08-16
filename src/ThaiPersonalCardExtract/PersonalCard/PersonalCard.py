@@ -1,4 +1,5 @@
-from ..utils import Language, Provider, automatic_brightness_and_contrast
+from ..utils import Language, Provider
+from collections import namedtuple
 import os
 import cv2
 import sys
@@ -8,7 +9,6 @@ import pytesseract
 import easyocr
 from PIL import Image
 from pathlib import Path
-
 
 class PersonalCard:
     def __init__(self,
@@ -187,7 +187,8 @@ class PersonalCard:
             self.cardInfo[str(self.lang)]["PrefixEN"] = str(extract_en[0])
             self.cardInfo[str(self.lang)]["NameEN"] = str(extract_en[1:])
 
-        return self.cardInfo[str(self.lang)]
+        _card = namedtuple('Card', self.cardInfo[str(self.lang)].keys())(*self.cardInfo[str(self.lang)].values())
+        return _card
 
     def extractInfo(self, image):
         self.image = self.__readImage(image)

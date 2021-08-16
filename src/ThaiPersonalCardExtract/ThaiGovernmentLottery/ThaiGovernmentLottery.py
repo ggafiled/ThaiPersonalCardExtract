@@ -1,27 +1,21 @@
-from ..utils import Language, Provider, automatic_brightness_and_contrast, remove_horizontal_line
+from collections import namedtuple
+from pylibdmtx.pylibdmtx import decode
+from pathlib import Path
 import os
 import cv2
-import sys
 import yaml
 import numpy as np
-import pytesseract
-import easyocr
 from PIL import Image
-from pathlib import Path
 
+Lottery = namedtuple('Lottery',['LotteryNumber','LessonNumber','SetNumber','Year'])
 
 class ThaiGovernmentLottery:
     def __init__(self,
-                 lang: Language = Language.MIX,
-                 provider: Provider = Provider.DEFAULT,
                  template_threshold: float = 0.7,
                  sift_rate: int = 25000,
-                 tesseract_cmd: str = None,
                  save_extract_result: bool = False,
                  path_to_save: str = None):
 
-        self.lang = lang
-        self.provider = provider
         self.root_path = Path(__file__).parent.parent
         self.template_threshold = template_threshold
         self.image = None
@@ -30,31 +24,6 @@ class ThaiGovernmentLottery:
         self.index_params = dict(algorithm=0, tree=5)
         self.search_params = dict()
         self.good = []
-        self.cardInfo = {
-            "mix": {
-                "LotteryNumber": "",
-                "DateLesson": "",
-                "LessonNumber": "",
-                "SetNumber": "",
-            },
-            "tha": {
-                "LotteryNumber": "",
-                "DateLesson": "",
-                "LessonNumber": "",
-                "SetNumber": "",
-            },
-            "eng": {
-                "LotteryNumber": "",
-                "DateLesson": "",
-                "LessonNumber": "",
-                "SetNumber": "",
-            }
-        }
-
-        if sys.platform.startswith("win"):
-            if tesseract_cmd is None:
-                raise ValueError("Please define your tesseract command path.")
-            pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
         if save_extract_result is True:
             if path_to_save is None or path_to_save is "":
@@ -62,8 +31,6 @@ class ThaiGovernmentLottery:
 
         self.flann = cv2.FlannBasedMatcher(self.index_params, self.search_params)
         self.sift = cv2.SIFT_create(sift_rate)
-        if str(provider) == str(Provider.EASYOCR) or str(provider) == str(Provider.DEFAULT):
-            self.reader = easyocr.Reader(['th', 'en'], gpu=True)
         self.__loadSIFT()
         self.h, self.w, *other = self.source_image_front_tempalte.shape
 
@@ -104,43 +71,22 @@ class ThaiGovernmentLottery:
             cv2.imwrite(os.path.join(self.path_to_save, 'image_scan.jpg'), self.image_scan)
 
     def __extractItems(self):
-        for index, box in enumerate(
-                self.roi_extract["roi_extract"] if str(self.lang) == str(Language.MIX) else filter(
-                    lambda item: str(self.lang) in item["lang"],
-                    self.roi_extract["roi_extract"])):
+        for index, box in enumerate(self.roi_extract["roi_extract"]):
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
             imgCrop = cv2.convertScaleAbs(imgCrop)
-            # imgCrop = automatic_brightness_and_contrast(imgCrop)[0]
 
-            if str(self.provider) == str(Provider.DEFAULT):
-                if str(box["provider"]) == str(str(Provider.EASYOCR)):
-                    self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, min_size=25,blocklist=box["blocklist"], allowlist=box["allowlist"]))).split())
-                elif str(box["provider"]) == str(Provider.TESSERACT):
-                    self.cardInfo[str(self.lang)][box["name"]] = str.strip(
-                        " ".join(pytesseract.image_to_string(imgCrop, lang=box["lang"].split(",")[0], config=box["tesseract_config"])
-                            .replace('\n', '')
-                            .replace('\x0c', '')
-                            .replace('-', '')
-                            .replace('"', '')
-                            .replace("'", '')
-                            .split()))
-            elif str(self.provider) == str(Provider.EASYOCR):
-                self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip(
-                        "".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, min_size=25, blocklist=box["blocklist"], allowlist=box["allowlist"]))).split())
-            elif str(self.provider) == str(Provider.TESSERACT):
-                self.cardInfo[str(self.lang)][box["name"]] = str.strip(
-                    " ".join(pytesseract.image_to_string(imgCrop, lang=box["lang"].split(",")[0], config=box["tesseract_config"])
-                            .replace('\n', '')
-                            .replace('\x0c', '')
-                            .replace('-', '')
-                            .replace('"', '')
-                            .replace("'", '')
-                            .split()))
+            if str(box["provider"]) == "qrcode":
+                self.result = \
+                decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode("ascii")
 
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)
 
-        return self.cardInfo[str(self.lang)]
+        Year, LessonNumber, SetNumber, LotteryNumber = self.result.split("-",4)
+
+        _lottery = Lottery(Year=Year, LotteryNumber=LotteryNumber, LessonNumber=LessonNumber, SetNumber=SetNumber)
+
+        return _lottery
 
     def extractInfo(self, image):
         self.image = self.__readImage(image)

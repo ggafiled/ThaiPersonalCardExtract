@@ -6,14 +6,14 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature v1.3 🎁
+## New Feature v1.3.1 🎁
 * Increase performance.
 * Support Thai Driving License (Beta) สามารถสกัดข้อมูลจากภาพถ่ายใบขับขี่ได้บางรูปแบบ เนื่องจาก กรมทางขนส่งทางบก มีรูปแบบบัตรหลากหลายรูปแบบ และแต่ละรูปแบบมีตำแหน่งข้อมูลที่แตกต่างกัน จึงทำให้ประสิทธิภาพต่ำ
-* ปรับเปลี่ยนรูปแบบไฟล์ระบบ
-* Support Thai Government Lottery (Further works)
+* Support Thai Government Lottery (16 Aug. 2021)
 
 ## Examples
 #### Real image file.
+![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card7.jpg?raw=true)
 ![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card.jpg?raw=true)
 ![Real image file](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/card4.jpg?raw=true)
 
@@ -58,9 +58,6 @@ pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 <b>Note 2:</b> for Linux os, please install tesseract by following the official instruction https://github.com/tesseract-ocr/tesseract
 
 ## Usage
-
-[![Watch the video](http://i3.ytimg.com/vi/FmPN667DTmE/hqdefault.jpg)](https://www.youtube.com/watch?v=FmPN667DTmE&t=5s)
-
 ``` python
 # With build-in Config Options.
 import ThaiPersonalCardExtract as card
@@ -82,7 +79,13 @@ print(result)
 
 # With free-style 
 from ThaiPersonalCardExtract import DrivingLicense
-reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
+reader = DrivingLicense(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
+result = reader.extractInfo('examples/card.jpg')
+print(result)
+
+# With free-style 
+from ThaiPersonalCardExtract import ThaiGovernmentLottery
+reader = ThaiGovernmentLottery(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 result = reader.extractInfo('examples/card.jpg')
 print(result)
 ```
@@ -90,6 +93,7 @@ print(result)
 Output will be in list format, each item represents result of library can extract, respectively.
 
 ``` bash
+#Output of PersonalCard
 {
    "Identification_Number": "9999999999999",
    "FullNameTH": "นาย อายุมฺมุราเสะ",
@@ -107,6 +111,14 @@ Output will be in list format, each item represents result of library can extrac
    "DateOfIssueEN": "~11 Ang. 2021",
    "DateOfExpiryTH": "11 ส.ค. 2574",
    "DateOfExpiryEN": "21 ug. 2092"
+}
+
+#Output of ThaiGovernmentLottery
+{
+   "LotteryNumber":"424603",
+   "DateLesson":"16 กุมภ1พันธ์ 2564",
+   "LessonNumber":"",
+   "SetNumber":"23"
 }
 ```
 

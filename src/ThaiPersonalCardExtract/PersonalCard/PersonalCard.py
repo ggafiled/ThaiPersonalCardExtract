@@ -85,8 +85,9 @@ class PersonalCard:
 
         self.flann = cv2.FlannBasedMatcher(self.index_params, self.search_params)
         self.sift = cv2.SIFT_create(sift_rate)
-        self.reader = easyocr.Reader(['th', 'en'], gpu=True) if str(provider) == str(Provider.EASYOCR) or str(
-            Provider.DEFAULT) else None
+
+        if str(provider) == str(Provider.EASYOCR) or str(provider) == str(Provider.DEFAULT):
+            self.reader = easyocr.Reader(['th', 'en'], gpu=True)
         self.__loadSIFT()
         self.h, self.w = self.source_image_front_tempalte.shape
 
@@ -117,12 +118,14 @@ class PersonalCard:
                 self.good.append(x)
 
     def __findAndWrapObject(self):
-        if len(self.good) > 10:
+        if len(self.good) > 30:
             processPoints = np.float32([self.process_kp[m.queryIdx].pt for m in self.good]).reshape(-1, 1, 2)
             sourcePoints = np.float32([self.source_front_kp[m.trainIdx].pt for m in self.good]).reshape(-1, 1, 2)
 
             M, _ = cv2.findHomography(processPoints, sourcePoints, cv2.RANSAC, 5.0)
             self.image_scan = cv2.warpPerspective(self.image, M, (self.w, self.h))
+        else:
+            self.image_scan = self.image
 
         if self.save_extract_result:
             cv2.imwrite(os.path.join(self.path_to_save, 'image_scan.jpg'), self.image_scan)

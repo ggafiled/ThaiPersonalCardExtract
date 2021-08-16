@@ -1,0 +1,64 @@
+{
+  "roi_extract": [
+    {
+      "point": [
+        298,
+        20,
+        519,
+        65
+      ],
+      "type": "text",
+      "name": "LotteryNumber",
+      "lang": "eng,tha",
+      "tesseract_config": "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789",
+      "blocklist": "",
+      "allowlist": "0123456789",
+      "provider": "easyocr"
+    },
+    {
+      "point": [
+        308,
+        84,
+        510,
+        113
+      ],
+      "type": "text",
+      "name": "DateLesson",
+      "lang": "tha,eng",
+      "tesseract_config": "--psm 7 --oem 1",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": "easyocr"
+    },
+    {
+      "point": [
+        364,
+        178,
+        406,
+        212
+      ],
+      "type": "text",
+      "name": "LessonNumber",
+      "lang": "eng,tha",
+      "tesseract_config": "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789",
+      "blocklist": "",
+      "allowlist": "0123456789",
+      "provider": "easyocr"
+    },
+    {
+      "point": [
+        466,
+        172,
+        524,
+        213
+      ],
+      "type": "text",
+      "name": "SetNumber",
+      "lang": "eng,tha",
+      "tesseract_config": "--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789",
+      "blocklist": "",
+      "allowlist": "0123456789",
+      "provider": "easyocr"
+    }
+  ]
+}

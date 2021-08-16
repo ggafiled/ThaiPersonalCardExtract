@@ -69,3 +69,17 @@ def automatic_brightness_and_contrast(image, clip_hist_percent=25):
 
     auto_result = convertScale(image, alpha=alpha, beta=beta)
     return (auto_result, alpha, beta)
+
+def remove_horizontal_line(image):
+    thresh = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+    # Remove horizontal
+    horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 1))
+    detected_lines = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, horizontal_kernel, iterations=2)
+    cnts = cv2.findContours(detected_lines, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    for c in cnts:
+        cv2.drawContours(image, [c], -1, (255, 255, 255), 2)
+    # Repair image
+    repair_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 6))
+    result = 255 - cv2.morphologyEx(255 - image, cv2.MORPH_CLOSE, repair_kernel, iterations=1)
+    return result

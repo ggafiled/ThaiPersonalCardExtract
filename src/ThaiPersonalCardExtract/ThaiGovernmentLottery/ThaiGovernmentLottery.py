@@ -1,4 +1,4 @@
-from ..utils import Language, Provider, automatic_brightness_and_contrast
+from ..utils import Language, Provider, automatic_brightness_and_contrast, remove_horizontal_line
 import os
 import cv2
 import sys
@@ -10,7 +10,7 @@ from PIL import Image
 from pathlib import Path
 
 
-class DrivingLicense:
+class ThaiGovernmentLottery:
     def __init__(self,
                  lang: Language = Language.MIX,
                  provider: Provider = Provider.DEFAULT,
@@ -32,35 +32,22 @@ class DrivingLicense:
         self.good = []
         self.cardInfo = {
             "mix": {
-                "License_Number": "",
-                "IssueDateTH": "",
-                "ExpiryDateTH": "",
-                "IssueDateEN": "",
-                "ExpiryDateEN": "",
-                "NameTH": "",
-                "NameEN": "",
-                "BirthDayTH": "",
-                "BirthDayEN": "",
-                "Identity_Number": "",
-                "Province": "",
+                "LotteryNumber": "",
+                "DateLesson": "",
+                "LessonNumber": "",
+                "SetNumber": "",
             },
             "tha": {
-                "License_Number": "",
-                "IssueDateTH": "",
-                "ExpiryDateTH": "",
-                "NameTH": "",
-                "BirthDayTH": "",
-                "Identity_Number": "",
-                "Province": "",
+                "LotteryNumber": "",
+                "DateLesson": "",
+                "LessonNumber": "",
+                "SetNumber": "",
             },
             "eng": {
-                "License_Number": "",
-                "IssueDateEN": "",
-                "ExpiryDateEN": "",
-                "NameEN": "",
-                "BirthDayEN": "",
-                "Identity_Number": "",
-                "Province": "",
+                "LotteryNumber": "",
+                "DateLesson": "",
+                "LessonNumber": "",
+                "SetNumber": "",
             }
         }
 
@@ -78,13 +65,13 @@ class DrivingLicense:
         if str(provider) == str(Provider.EASYOCR) or str(provider) == str(Provider.DEFAULT):
             self.reader = easyocr.Reader(['th', 'en'], gpu=True)
         self.__loadSIFT()
-        self.h, self.w = self.source_image_front_tempalte.shape
+        self.h, self.w, *other = self.source_image_front_tempalte.shape
 
     def __loadSIFT(self):
         self.source_image_front_tempalte = self.__readImage(
-            os.path.join(self.root_path, 'datasets', 'driving_license/thai-driving-license-template.jpg'))
+            os.path.join(self.root_path, 'datasets', 'thai_government_lottery/thai-government-lottery-tamplate.jpg'))
         self.source_front_kp, self.source_front_des = self.sift.detectAndCompute(self.source_image_front_tempalte, None)
-        with open(os.path.join(self.root_path, 'datasets', 'driving_license/config.yaml'), 'r') as f:
+        with open(os.path.join(self.root_path, 'datasets', 'thai_government_lottery/config.yaml'), 'r') as f:
             try:
                 self.roi_extract = yaml.safe_load(f)
             except yaml.YAMLError as exc:
@@ -92,7 +79,7 @@ class DrivingLicense:
 
     def __readImage(self, image=None):
         try:
-            img = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+            img = cv2.imread(image)
             return img
         except cv2.error as e:
             raise ValueError(f"Can't read image from source. cause {e.msg}")
@@ -123,11 +110,11 @@ class DrivingLicense:
                     self.roi_extract["roi_extract"])):
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
             imgCrop = cv2.convertScaleAbs(imgCrop)
-            imgCrop = automatic_brightness_and_contrast(imgCrop)[0]
+            # imgCrop = automatic_brightness_and_contrast(imgCrop)[0]
 
-            if str(self.provider) == Provider.DEFAULT.value:
+            if str(self.provider) == str(Provider.DEFAULT):
                 if str(box["provider"]) == str(str(Provider.EASYOCR)):
-                    self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, blocklist=box["blocklist"]))).split())
+                    self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip("".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, min_size=25,blocklist=box["blocklist"], allowlist=box["allowlist"]))).split())
                 elif str(box["provider"]) == str(Provider.TESSERACT):
                     self.cardInfo[str(self.lang)][box["name"]] = str.strip(
                         " ".join(pytesseract.image_to_string(imgCrop, lang=box["lang"].split(",")[0], config=box["tesseract_config"])
@@ -139,7 +126,7 @@ class DrivingLicense:
                             .split()))
             elif str(self.provider) == str(Provider.EASYOCR):
                 self.cardInfo[str(self.lang)][box["name"]] = " ".join(str.strip(
-                        "".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, blocklist=box["blocklist"]))).split())
+                        "".join(self.reader.readtext(imgCrop, detail=0, paragraph=True, width_ths=1.0, min_size=25, blocklist=box["blocklist"], allowlist=box["allowlist"]))).split())
             elif str(self.provider) == str(Provider.TESSERACT):
                 self.cardInfo[str(self.lang)][box["name"]] = str.strip(
                     " ".join(pytesseract.image_to_string(imgCrop, lang=box["lang"].split(",")[0], config=box["tesseract_config"])

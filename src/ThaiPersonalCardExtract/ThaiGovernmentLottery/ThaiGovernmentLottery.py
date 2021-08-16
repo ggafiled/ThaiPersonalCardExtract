@@ -76,8 +76,7 @@ class ThaiGovernmentLottery:
             imgCrop = cv2.convertScaleAbs(imgCrop)
 
             if str(box["provider"]) == "qrcode":
-                self.result = \
-                decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode("ascii")
+                self.result = decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode("ascii")
 
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)

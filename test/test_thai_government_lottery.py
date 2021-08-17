@@ -4,5 +4,5 @@ reader = card.ThaiGovernmentLottery(
     path_to_save="D:/dev/ThaiPersonalCardExtract/examples/extract/thai_government_lottery")
     # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 
-result = reader.extractInfo("../examples/card7.jpg")
+result = reader.extractInfo("../examples/card14.jpg")
 print(result)

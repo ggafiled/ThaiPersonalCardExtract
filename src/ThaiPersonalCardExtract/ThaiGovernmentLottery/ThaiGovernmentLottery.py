@@ -1,3 +1,4 @@
+from ..utils import automatic_brightness_and_contrast
 from collections import namedtuple
 from pylibdmtx.pylibdmtx import decode
 from pathlib import Path
@@ -19,6 +20,7 @@ class ThaiGovernmentLottery:
         self.root_path = Path(__file__).parent.parent
         self.template_threshold = template_threshold
         self.image = None
+        self.result = "00-00-00-000000"
         self.save_extract_result = save_extract_result
         self.path_to_save = path_to_save
         self.index_params = dict(algorithm=0, tree=5)
@@ -47,6 +49,12 @@ class ThaiGovernmentLottery:
     def __readImage(self, image=None):
         try:
             img = cv2.imread(image)
+            if img.shape[1] > 1280:
+                scale_percent = 60  # percent of original size
+                width = int(img.shape[1] * scale_percent / 100)
+                height = int(img.shape[0] * scale_percent / 100)
+                dim = (width, height)
+                img = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
             return img
         except cv2.error as e:
             raise ValueError(f"Can't read image from source. cause {e.msg}")
@@ -76,14 +84,18 @@ class ThaiGovernmentLottery:
             imgCrop = cv2.convertScaleAbs(imgCrop)
 
             if str(box["provider"]) == "qrcode":
-                self.result = decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode("ascii")
+                try:
+                    self.result = decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode(
+                        "ascii")
+                except:
+                    pass
 
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)
 
         Year, LessonNumber, SetNumber, LotteryNumber = self.result.split("-",4)
 
-        _lottery = Lottery(Year=Year, LotteryNumber=LotteryNumber, LessonNumber=LessonNumber, SetNumber=SetNumber)
+        _lottery = Lottery(Year=f"25{Year}", LotteryNumber=LotteryNumber, LessonNumber=LessonNumber, SetNumber=SetNumber)
 
         return _lottery
 

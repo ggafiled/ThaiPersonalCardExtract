@@ -50,9 +50,9 @@ roi_extract:
   provider: ''
 - point:
   - 247
-  - 65
-  - 301
-  - 122
+  - 55
+  - 315
+  - 125
   type: text
   name: Qrcode
   lang: ''

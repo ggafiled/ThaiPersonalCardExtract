@@ -162,7 +162,7 @@ you can set options to Instance by below keyword
 | tesseract_cmd | String | Path of your tesseract command **For windows only.
 | save_extract_result | Boolean | Set True if you want to save extracted image *Default is False
 | path_to_save | String | Path that you given it save extracted image, relative with save_extract_result=True
-
+ 
 # Donate Me ☕
 
 ![promptpay](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/promptpay.png?raw=true)

@@ -1,4 +1,3 @@
-from ..utils import automatic_brightness_and_contrast
 from collections import namedtuple
 from pylibdmtx.pylibdmtx import decode
 from pathlib import Path
@@ -27,8 +26,8 @@ class ThaiGovernmentLottery:
         self.search_params = dict()
         self.good = []
 
-        if save_extract_result is True:
-            if path_to_save is None or path_to_save is "":
+        if save_extract_result == True:
+            if path_to_save == None or path_to_save == "":
                 raise ValueError("Please define your path to save extracted images.")
 
         self.flann = cv2.FlannBasedMatcher(self.index_params, self.search_params)
@@ -48,7 +47,7 @@ class ThaiGovernmentLottery:
 
     def __readImage(self, image=None):
         try:
-            img = cv2.imread(image)
+            img = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
             if img.shape[1] > 1280:
                 scale_percent = 60  # percent of original size
                 width = int(img.shape[1] * scale_percent / 100)
@@ -60,6 +59,7 @@ class ThaiGovernmentLottery:
             raise ValueError(f"Can't read image from source. cause {e.msg}")
 
     def __compareTemplateSimilarity(self, queryDescriptors, trainDescriptors):
+        self.good = []
         matches = self.flann.knnMatch(queryDescriptors, trainDescriptors, k=2)
         for x, y in matches:
             if x.distance < self.template_threshold * y.distance:
@@ -80,14 +80,14 @@ class ThaiGovernmentLottery:
 
     def __extractItems(self):
         for index, box in enumerate(self.roi_extract["roi_extract"]):
+            self.result = "00-00-00-000000"
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
-            imgCrop = cv2.convertScaleAbs(imgCrop)
 
             if str(box["provider"]) == "qrcode":
                 try:
                     self.result = decode((imgCrop.tobytes(), imgCrop.shape[1], imgCrop.shape[0]))[0].data.decode(
                         "ascii")
-                except:
+                except Exception as e:
                     pass
 
             if self.save_extract_result:

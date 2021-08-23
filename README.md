@@ -6,7 +6,8 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature v1.3.2 🎁
+## New Feature v1.3.3 🎁
+* Fix bug dataset folder not import thai_government_lottery resource. (23 Aug. 2021) [#1](https://github.com/ggafiled/ThaiPersonalCardExtract/issues/1)
 * Increase performance.
 * Support Thai Government Lottery สกัดข้อมูลจากลอตเตอร์รี่ ใช้ได้ดีกับรูปภาพที่ได้จากเครื่องแสกน (16 Aug. 2021)
 * Refactor Output Structure.

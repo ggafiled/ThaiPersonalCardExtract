@@ -75,12 +75,12 @@ class PersonalCard:
         }
 
         if sys.platform.startswith("win"):
-            if tesseract_cmd is None:
+            if tesseract_cmd == None:
                 raise ValueError("Please define your tesseract command path.")
             pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
-        if save_extract_result is True:
-            if path_to_save is None or path_to_save is "":
+        if save_extract_result == True:
+            if path_to_save == None or path_to_save == "":
                 raise ValueError("Please define your path to save extracted images.")
 
         self.flann = cv2.FlannBasedMatcher(self.index_params, self.search_params)
@@ -118,6 +118,7 @@ class PersonalCard:
             raise ValueError(f"Can't read image from source. cause {e.msg}")
 
     def __compareTemplateSimilarity(self, queryDescriptors, trainDescriptors):
+        self.good = []
         matches = self.flann.knnMatch(queryDescriptors, trainDescriptors, k=2)
         for x, y in matches:
             if x.distance < self.template_threshold * y.distance:

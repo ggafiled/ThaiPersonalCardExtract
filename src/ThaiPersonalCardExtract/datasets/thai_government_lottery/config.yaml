@@ -49,10 +49,10 @@ roi_extract:
   allowlist: ''
   provider: ''
 - point:
-  - 247
-  - 55
-  - 315
-  - 125
+  - 220
+  - 33
+  - 353
+  - 145
   type: text
   name: Qrcode
   lang: ''

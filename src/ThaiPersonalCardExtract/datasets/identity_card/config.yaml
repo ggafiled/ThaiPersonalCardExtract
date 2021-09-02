@@ -148,10 +148,10 @@ roi_extract:
     provider: tesseract
   back:
   - point:
-    - 225
-    - 265
-    - 641
-    - 368
+    - 237
+    - 298
+    - 626
+    - 345
     type: text
     name: LaserCode
     lang: eng

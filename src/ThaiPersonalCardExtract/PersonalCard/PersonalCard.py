@@ -1,4 +1,4 @@
-from ..utils import Language, Provider, Card
+from ..utils import Language, Provider, Card, remove_dot_noise
 from collections import namedtuple
 import re
 import os
@@ -94,7 +94,7 @@ class PersonalCard:
         if str(provider) == str(Provider.EASYOCR) or str(provider) == str(Provider.DEFAULT):
             self.reader = easyocr.Reader(['en', 'th'], gpu=True)
         self.__loadSIFT()
-        self.h, self.w = self.source_image_front_tempalte.shape
+        self.h, self.w, *other = self.source_image_front_tempalte.shape
 
     def __loadSIFT(self):
         self.source_image_front_tempalte = self.__readImage(
@@ -111,7 +111,8 @@ class PersonalCard:
 
     def __readImage(self, image=None):
         try:
-            img = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+            img = cv2.imread(image, cv2.IMREAD_COLOR)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             if img.shape[1] > 1280:
                 scale_percent = 60  # percent of original size
                 width = int(img.shape[1] * scale_percent / 100)
@@ -152,7 +153,10 @@ class PersonalCard:
                     lambda item: str(self.lang) in item["lang"],
                     self.roi_extract["roi_extract"])):
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
-            # imgCrop = cv2.adaptiveThreshold(imgCrop, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8)
+            imgCrop = cv2.adaptiveThreshold(imgCrop[:,:,0], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8) + cv2.adaptiveThreshold(imgCrop[:,:,1], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8) + cv2.adaptiveThreshold(imgCrop[:,:,2], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8)
+
+            if str(side) == str(Card.BACK_TEMPLATE):
+                imgCrop = remove_dot_noise(imgCrop)
 
             if str(self.provider) == Provider.DEFAULT.value:
                 if str(box["provider"]) == str(str(Provider.EASYOCR)):

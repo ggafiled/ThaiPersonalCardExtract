@@ -6,12 +6,27 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature v1.3.3 🎁
+## New Feature v1.3.4 🎁
+* Support Thai identity card laser code extract. (02 Sep. 2021)
 * Fix bug dataset folder not import thai_government_lottery resource. (23 Aug. 2021) [#1](https://github.com/ggafiled/ThaiPersonalCardExtract/issues/1)
 * Increase performance.
 * Support Thai Government Lottery สกัดข้อมูลจากลอตเตอร์รี่ ใช้ได้ดีกับรูปภาพที่ได้จากเครื่องแสกน (16 Aug. 2021)
 * Refactor Output Structure.
 * Support Thai Driving License (Beta) สามารถสกัดข้อมูลจากภาพถ่ายใบขับขี่ได้บางรูปแบบ เนื่องจาก กรมทางขนส่งทางบก มีรูปแบบบัตรหลากหลายรูปแบบ และแต่ละรูปแบบมีตำแหน่งข้อมูลที่แตกต่างกัน จึงทำให้ประสิทธิภาพต่ำ
+
+#### Example for new feature.
+``` python
+from ThaiPersonalCardExtract import PersonalCard
+reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
+
+# สำหรับตรวจจับภาพด้านหน้าบัตร
+result = reader.extract_front_info("../examples/card1.jpg")
+print(result)
+
+# และด้านหลังบัตร
+result = reader.extract_back_info("../examples/card5.jpg")
+print(result)
+```
 
 ## Examples
 #### Example image file.
@@ -35,7 +50,7 @@ Resutls of library extract region of interest
 | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Religion.jpg?raw=true"/></kbd> </p> <p align="center" class="image-caption">Religion</p>  | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/Address.jpg?raw=true"/></kbd></p>   <p align="center" class="image-caption">Address</p> |
 | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/DateOfIssueTH.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">DateOfIssueTH</p> | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/DateOfIssueEN.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">DateOfIssueEN</p> |
 | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/DateOfExpiryTH.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">DateOfExpiryTH</p> | <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/DateOfExpiryEN.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">DateOfExpiryEN</p> |
-
+| <p align="center"><kbd><img src="https://github.com/ggafiled/ThaiPersonalCardExtract/blob/main/examples/extract/LaserCode.jpg?raw=true"/></kbd>  </p> <p align="center" class="image-caption">LaserCode</p> |
 
 ## Recommend ⚠
 * Image quality lowest should be 600x350

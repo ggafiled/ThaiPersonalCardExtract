@@ -20,6 +20,13 @@ class Provider(Enum):
     def __str__(self):
         return self.value
 
+class Card(Enum):
+    FRONT_TEMPLATE = 'front'
+    BACK_TEMPLATE = 'back'
+
+    def __str__(self):
+        return self.value
+
 
 def convertScale(img, alpha, beta):
     """Add bias and gain to an image with saturation arithmetics. Unlike

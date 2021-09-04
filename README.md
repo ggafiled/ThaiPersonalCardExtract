@@ -77,7 +77,7 @@ pip install git+git://github.com/ggafiled/ThaiPersonalCardExtrac.git
 
 ## Usage
 ``` python
-# With build-in Config Options. 
+# With build-in Config Options. For extractInfo function please use  <= v1.3.3 
 
 import ThaiPersonalCardExtract as card
 reader = card.PersonalCard(
@@ -90,7 +90,7 @@ result = reader.extractInfo('examples/card.jpg')
 print(result)
 
 
-# With free-style ตัวอย่างการเรียกใช้งานคลาส PersonalCard เพื่อสกัดข้อมูลบัตรประจำตัวประชาชน 
+# With free-style ตัวอย่างการเรียกใช้งานคลาส PersonalCard เพื่อสกัดข้อมูลบัตรประจำตัวประชาชน For extractInfo function please use  <= v1.3.3 
 
 from ThaiPersonalCardExtract import PersonalCard
 reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
@@ -134,7 +134,7 @@ Output will be in list format, each item represents result of library can extrac
  print(result.Year)
 ```
 
-For set ``` lang ``` attribute to ``` tha ```
+For set ``` lang ``` attribute to ``` tha ``` For extractInfo function please use  <= v1.3.3 
 ``` python
 from ThaiPersonalCardExtract import PersonalCard
 reader = PersonalCard(lang="tha", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
@@ -160,7 +160,7 @@ Output will be in list format, each item represents result of library can extrac
 
 And you can set ocr provider following below ``` default  #used both easyocr and tesseract **Recommend ``` Or ``` easyocr ``` Or ``` tesseract ```
 ``` python
-from ThaiPersonalCardExtract import PersonalCard
+from ThaiPersonalCardExtract import PersonalCard # For extractInfo function please use  <= v1.3.3 
 reader = PersonalCard(lang="tha", provider="default", tesseract_cmd="D:/Program Files/Tesseract-OCR/tesseract") # for windows need to pass tesseract_cmd parameter to setup your tesseract command path.
 result = reader.extractInfo('examples/card.jpg')
 print(result)

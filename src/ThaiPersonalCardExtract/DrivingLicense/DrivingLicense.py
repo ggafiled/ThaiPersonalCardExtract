@@ -4,6 +4,7 @@ import os
 import cv2
 import sys
 import yaml
+import base64, binascii
 import numpy as np
 import pytesseract
 import easyocr
@@ -92,7 +93,13 @@ class DrivingLicense:
 
     def __readImage(self, image=None):
         try:
-            img = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+            try:
+                # handler if image params is base64 encode.
+                img = cv2.imdecode(np.fromstring(base64.b64decode(image, validate=True), np.uint8), cv2.IMREAD_GRAYSCALE)
+            except binascii.Error:
+                # handler if image params is string path.
+                img = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+
             if img.shape[1] > 1280:
                 scale_percent = 60  # percent of original size
                 width = int(img.shape[1] * scale_percent / 100)

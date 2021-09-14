@@ -6,7 +6,8 @@
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
-## New Feature v1.3.4 🎁
+## New Feature v1.3.5 🎁
+* Support Base64 input parameter for image object for all class. (14 Sep. 2021)
 * Support Thai identity card laser code extract. (02 Sep. 2021)
 * Fix bug dataset folder not import thai_government_lottery resource. (23 Aug. 2021) [#1](https://github.com/ggafiled/ThaiPersonalCardExtract/issues/1)
 * Increase performance.
@@ -21,6 +22,11 @@ reader = PersonalCard(lang="mix", tesseract_cmd="D:/Program Files/Tesseract-OCR/
 
 # สำหรับตรวจจับภาพด้านหน้าบัตร
 result = reader.extract_front_info("../examples/card1.jpg")
+print(result)
+
+# หรือหากต้องการส่งไฟล์ภาพเป็น ข้อมูลแบบเข้ารหัส base64 สามารถทำได้ดังนี้ 
+# สามารถส่งข้อมูลแบบ base64 แทนการส่งที่อยู่ไฟล์แบบเดิมได้ในทุก class 
+result = reader.extract_front_info("/9j/4AAQSkZJRgABAQEAeAB4AA....")
 print(result)
 
 # และด้านหลังบัตร

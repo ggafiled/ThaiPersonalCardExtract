@@ -5,6 +5,7 @@ import os
 import cv2
 import sys
 import yaml
+import base64, binascii
 import numpy as np
 import pytesseract
 import easyocr
@@ -111,7 +112,13 @@ class PersonalCard:
 
     def __readImage(self, image=None):
         try:
-            img = cv2.imread(image, cv2.IMREAD_COLOR)
+            try:
+                # handler if image params is base64 encode.
+                img = cv2.imdecode(np.fromstring(base64.b64decode(image, validate=True), np.uint8), cv2.IMREAD_COLOR)
+            except binascii.Error:
+                # handler if image params is string path.
+                img = cv2.imread(image, cv2.IMREAD_COLOR)
+
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             if img.shape[1] > 1280:
                 scale_percent = 60  # percent of original size

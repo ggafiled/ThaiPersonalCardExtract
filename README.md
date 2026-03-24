@@ -2,7 +2,7 @@
 [![Downloads](http://pepy.tech/badge/thai-personal-card-extract)](http://pepy.tech/project/thai-personal-card-extract)
 [![PyPI Status](https://badge.fury.io/py/thai-personal-card-extract.svg)](https://badge.fury.io/py/thai-personal-card-extract)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ggafiled/ThaiPersonalCardExtract/blob/master/LICENSE)
-[![Instragram](https://img.shields.io/badge/instragram-@ggafiled-blue.svg?style=flat)](https://www.instagram.com/ggusfieldz)
+[![Instragram](https://img.shields.io/badge/instragram-@ggusfieldz-blue.svg?style=flat)](https://www.instagram.com/ggusfieldz)
 
 Library for extract infomation from thai personal identity card. imprement from easyocr and tesseract
 
